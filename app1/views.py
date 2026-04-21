@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import Student, Course, Enrollment
 from .serializers import StudentSerializer, CourseSerializer, EnrollmentSerializer
+from rest_framework.permissions import IsAuthenticated
 
 # STUDENT
 class StudentCreate(generics.CreateAPIView):
@@ -11,6 +12,8 @@ class StudentCreate(generics.CreateAPIView):
 class StudentList(generics.ListAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    permission_classes = [IsAuthenticated]
+
 
 class StudentUpdate(generics.UpdateAPIView):
     queryset = Student.objects.all()
